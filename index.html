@@ -58,6 +58,11 @@
     .bingo-button.clicked {
       background-color: red;
     }
+
+    .bingo-button--free:hover,
+    .bingo-button--free.clicked {
+      background-color: transparent;
+    }
   </style>
 </head>
 <body>
@@ -107,7 +112,7 @@
         <button class="bingo-button js-bingo-button">Error</button>
       </div>
       <div class="bingo-table__item">
-        <button class="bingo-button js-bingo-button">Error</button>
+        <button class="bingo-button bingo-button--free">FREE</button>
       </div>
       <div class="bingo-table__item">
         <button class="bingo-button js-bingo-button">Error</button>
@@ -224,6 +229,8 @@
       `The best X a judge has had`,
       `A cooking noise is edited to the beat`,
       `"Bad day at the office"`,
+      `Panacotta`,
+      `Something doesn't set`,
     ];
 
     const shuffledItems = items
@@ -232,7 +239,7 @@
       .map((a) => a.value);
 
     const bingoTable = document.querySelector('.js-bingo-table');
-    const bingoSquares = bingoTable.querySelectorAll('.bingo-button');
+    const bingoSquares = bingoTable.querySelectorAll('.js-bingo-button');
     bingoSquares.forEach(function(elem, index) {
       elem.innerText = shuffledItems[index];
 
