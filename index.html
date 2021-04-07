@@ -150,40 +150,53 @@
   </div>
 
   <script>
-    const items = [
-      `Something pickled`,
+    function shuffleItems(array) {
+      const shuffledItems = array
+      .map((a) => ({sort: Math.random(), value: a}))
+      .sort((a, b) => a.sort - b.sort)
+      .map((a) => a.value);
+
+      return shuffledItems;
+    }
+
+    const professionalItems = [
       `Sleeve tattoo`,
       `“Show them/the judges what I can do”`,
+      `"Sea vegetables"`,
+      `Bisque`,
+      `Contestant has cooked all over the world`,
+      `Mousseline`,
+      `Buttery biscuit base`,
+      `Marcus Wareing ego trip`,
+      `"In it to win it"`,
+      `"Modern British"`,
+      `Someone serves Marcus something purple`,
+      `Someone has a point to prove`,
+      `"Keep it simple"`,
+      `"Bad day at the office"`,
+    ];
+
+    const items = [
+      `Something pickled`,
       `Fondant potato`,
       `Soil/crumb`,
       `Celeriac puree`,
-      `"Sea vegetables"`,
       `“Belong on the same plate"`,
       `“Big bold flavours”`,
       `Something deconstructed`,
-      `Jus`,
       `Skin isn’t crispy enough`,
       `Chocolate fondant`,
-      `Bisque`,
       `Chickpeas`,
       `Something aerated or foam`,
       `Puffed rice`,
       `“A marriage/match made in heaven”`,
-      `Contestant has cooked all over the world`,
-      `Inspiration from "Asian" flavours/cuisine`,
       `Faggotts or bon bons`,
       `“Nowhere to hide”`,
-      `Mousseline`,
-      `Cauliflower`,
       `Split sauce`,
       `Something three-ways (or four- or five-)`,
-      `Passion/passionate`,
       `Deglazing pan`,
       `Rack of lamb`,
-      `Buttery biscuit base`,
       `Pan fried duck breast`,
-      `Marcus Wareing ego trip`,
-      `"In it to win it"`,
       `"Do they have what it takes"`,
       `Fresh pasta`,
       `Pasta too thick`,
@@ -191,53 +204,119 @@
       `"Gutted"`,
       `The "pressure" "gets" to someone`,
       `Someone mentions how Gregg likes puddings`,
-      `"Modern British"`,
       `"I'm very competitive"/"I like to win"`,
-      `Someone serves Marcus something purple`,
-      `Someone has a point to prove`,
-      `Something macerated`,
       `Risotto`,
       `Molecular gastronomy`,
-      `Textures`,
+      `"Textures"`,
       `Over-reduced sauce`,
       `Something burned/charred on purpose`,
       `Someone drops something`,
-      `"Keep it simple"`,
       `Nasturtium leaves`,
       `A rich sauce`,
-      `Gregg says "sauce" or "pork"`,
-      `Missing a sauce/dry`,
-      `Samphire`,
-      `Grainy`,
-      `Under-seasoned`,
       `Not refined enough`,
       `Portion is too big`,
       `Someone doesn't serve something or leaves it off the plate`,
       `"Weird"`,
-      `The dish doesn't work`,
+      `The dish "doesn't work"`,
       `The dish of the day`,
       `The best X a judge has had`,
       `A cooking noise is edited to the beat`,
-      `"Bad day at the office"`,
       `Panacotta`,
       `Something doesn't set`,
-      `Granola`,
-      `Gold leaf garnish`,
       `Parmesan crisp`,
       `Fat not rendered`,
       `John inspects fork of food before putting in mouth`,
-      `Something compressed`,
+      `Polenta`,
+      `Gel`,
+      `A dish splits the judges`,
+      `Fruit on a savoury dish`,
+      `Salted caramel`,
+      `"Oh, mate!"`,
+      `Something glazed`,
+      `Squid ink`,
+      `John says "I love it."`,
+      `Soufflé`,
+      `Girolle mushrooms`,
     ];
 
-    const shuffledItems = items
-      .map((a) => ({sort: Math.random(), value: a}))
-      .sort((a, b) => a.sort - b.sort)
-      .map((a) => a.value);
+    const easyItems = [
+      `Puree`,
+      `Beef`,
+      `Grainy`,
+      `Under-seasoned`,
+      `Gregg says "sauce" or "pork"`,
+      `Missing a sauce/dry`,
+      `Passion/passionate`,
+      `Cauliflower`,
+      `Inspiration from "Asian" flavours/cuisine`,
+      `Jus`,
+      `Lamb`,
+      `Fish`,
+      `A vegetarian dish`,
+      `Gregg says "however"`,
+      `"Perfect"`,
+      `Chicken`,
+      `Pork`,
+      `Duck`,
+      `Mushrooms`,
+      `Ice cream`,
+      `Custard`,
+      `Something pan fried`,
+      `Something roasted`,
+      `Carrots`,
+      `Peas`,
+      `Chocolate`,
+      `Fruit`,
+      `Caramel`,
+      `Nuts`,
+      `Mashed potato`,
+      `Potato`,
+      `"Buttery"`,
+      `"Soft"`,
+      `Someone cries`,
+      `Cheese`,
+      `Spices`,
+      `Over-seasoned`,
+      `Over-cooked`,
+      `Under-cooked`,
+      `Something deep fried`,
+      `Something using the sous vide`,
+      `Beans`,
+      `Pasta`,
+      `Curry`,
+      `Tart/pie`,
+      `Cake`,
+      `Rice`,
+      `Sorbet`,
+      `Meringue`,
+      `Something spicy/hot`,
+      `Tuile/crisp`,
+      `Fennel`,
+      `A Mediterranean-style dish`,
+      `Shellfish`,
+      `Pastry`,
+      `Something sautéed`,
+      `Citrus`,
+    ];
+
+    const shuffledEasy = shuffleItems(easyItems);
+    const shuffledNormal = shuffleItems(items);
+    let bingoSquareItems = [];
+
+    for(var i = 0; i < 14; i++) {
+      bingoSquareItems.push(shuffledEasy[i]);
+    }
+
+    for(var i = 0; i < 10; i++) {
+      bingoSquareItems.push(shuffledNormal[i]);
+    }
+
+    bingoSquareItems = shuffleItems(bingoSquareItems);
 
     const bingoTable = document.querySelector('.js-bingo-table');
     const bingoSquares = bingoTable.querySelectorAll('.js-bingo-button');
     bingoSquares.forEach(function(elem, index) {
-      elem.innerText = shuffledItems[index];
+      elem.innerText = bingoSquareItems[index];
 
       // Add event listener
       elem.addEventListener('click', function(e) {
